@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+
+            /* Background */
+            background:
+                radial-gradient(circle at 8% 5%, #05b7bd 0 25%, transparent 26%),
+                radial-gradient(circle at 78% 18%, #00dcb9 0 27%, transparent 28%),
+                radial-gradient(circle at 15% 90%, #0069ed 0 34%, transparent 35%),
+                linear-gradient(135deg, #05a9ca, #00d5b7);
+            position: relative;
+        }
+
+        /* Decorative background shapes */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 700px;
+            height: 450px;
+            left: -230px;
+            bottom: -180px;
+            background: #0071ed;
+            transform: rotate(-17deg);
+            opacity: 0.8;
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 500px;
+            right: -220px;
+            bottom: -260px;
+            background: #04cfc2;
+            transform: rotate(25deg);
+            opacity: 0.75;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 398px;
+            min-height: 506px;
+            background: #fff;
+            padding: 40px 51px 30px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Close icon */
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 22px;
+            color: #25d9b7;
+            font-size: 26px;
+            font-weight: 300;
+            cursor: pointer;
+        }
+
+        /* Heading */
+        h1 {
+            text-align: center;
+            font-size: 21px;
+            letter-spacing: 2px;
+            margin-bottom: 28px;
+            font-weight: 700;
+
+            background: linear-gradient(
+                90deg,
+                #0877db,
+                #08b9ba
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1::before {
+            content: "▪";
+            color: #1676dc;
+            margin-right: 8px;
+            -webkit-text-fill-color: #1676dc;
+        }
+
+        h1::after {
+            content: "▪";
+            color: #27cdb2;
+            margin-left: 8px;
+            -webkit-text-fill-color: #27cdb2;
+        }
+
+        /* Form */
+        .input-group {
+            position: relative;
+            margin-bottom: 23px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            color: #555;
+            letter-spacing: 0.7px;
+            margin-bottom: 8px;
+        }
+
+        .required::before {
+            content: "*";
+            color: #333;
+            margin-right: 7px;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            height: 27px;
+            border: none;
+            border-bottom: 2px solid #63d9c3;
+            outline: none;
+            color: #444;
+            background: transparent;
+            font-size: 13px;
+            padding: 2px 0;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-bottom-color: #0987dc;
+        }
+
+        /* Country */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        /* Password eye */
+        .password-wrapper {
+            position: relative;
+        }
+
+        .eye {
+            position: absolute;
+            right: 15px;
+            bottom: 9px;
+            width: 19px;
+            height: 12px;
+            background: #086bdc;
+            border-radius: 50% / 70%;
+        }
+
+        .eye::after {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            top: 3.5px;
+            left: 7px;
+        }
+
+        /* Terms */
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-top: 5px;
+            margin-bottom: 31px;
+        }
+
+        .terms input {
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border: 1px solid #1679d9;
+            background: white;
+            margin-top: 1px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .terms input:checked {
+            background: #1592d7;
+            box-shadow: inset 0 0 0 2px white;
+        }
+
+        .terms label {
+            font-size: 7px;
+            line-height: 9px;
+            color: #777;
+            letter-spacing: 0.4px;
+        }
+
+        /* Button */
+        .create-btn {
+            display: block;
+            width: 230px;
+            height: 47px;
+            margin: 0 auto 15px;
+            border: none;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+
+            background: linear-gradient(
+                90deg,
+                #078bd8,
+                #04ceb6
+            );
+
+            transition: 0.25s ease;
+        }
+
+        .create-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(0, 160, 190, 0.25);
+        }
+
+        /* Login text */
+        .login {
+            text-align: center;
+            font-size: 11px;
+            color: #555;
+            letter-spacing: 0.2px;
+        }
+
+        .login a {
+            color: #1677cf;
+            text-decoration: none;
+        }
+
+        .login a:hover {
+            text-decoration: underline;
+        }
+
+        /* Freepik-style footer text from reference */
+        .credit {
+            position: fixed;
+            z-index: 5;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                width: calc(100% - 35px);
+                padding-left: 35px;
+                padding-right: 35px;
+            }
+
+            .create-btn {
+                width: 100%;
+            }
+
+            .credit {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="close">&times;</div>
+
+        <h1>Registration Form</h1>
+
+        <form>
+
+            <div class="input-group">
+                <label class="required">Name</label>
+                <input type="text">
+            </div>
+
+            <div class="input-group">
+                <label class="required">Email address</label>
+                <input type="email">
+            </div>
+
+            <div class="input-group">
+                <label>Country</label>
+                <select>
+                    <option></option>
+                    <option>Pakistan</option>
+                    <option>United States</option>
+                    <option>United Kingdom</option>
+                    <option>Canada</option>
+                    <option>Australia</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label class="required">Phone</label>
+                <input type="tel">
+            </div>
+
+            <div class="input-group">
+                <label class="required">Password</label>
+
+                <div class="password-wrapper">
+                    <input type="password" id="password">
+                    <span class="eye" onclick="togglePassword()"></span>
+                </div>
+            </div>
+
+            <div class="terms">
+                <input type="checkbox" id="terms">
+
+                <label for="terms">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    sed diam<br>
+                    nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+                </label>
+            </div>
+
+            <button type="submit" class="create-btn">
+                CREATE ACCOUNT
+            </button>
+
+            <p class="login">
+                Already have an account?
+                <a href="#">Sing in</a>
+            </p>
+
+        </form>
+    </div>
+
+    <div class="credit">
+        designed by ✹ <strong>freepik</strong>
+    </div>
+
+
+    <script>
+        function togglePassword() {
+            const password = document.getElementById("password");
+
+            if (password.type === "password") {
+                password.type = "text";
+            } else {
+                password.type = "password";
+            }
+        }
+    </script>
+
+</body>
+</html>
